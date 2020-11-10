@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"go_micro_demo/proto"
+	"go_micro_demo/api"
 
 	"github.com/iGoogle-ink/gotil/xlog"
 	"github.com/micro/go-micro/v2"
@@ -27,10 +27,10 @@ func main2() {
 	service.Init()
 
 	// 向Service注册服务
-	greeterCli := proto.NewGreeterService("service.hello.world", service.Client())
+	greeterCli := api.NewGreeterService("service.hello.world", service.Client())
 
 	// 调用Service方法
-	rsp, err := greeterCli.Hello(context.Background(), &proto.Request{
+	rsp, err := greeterCli.Hello(context.Background(), &api.Request{
 		Name: "Jerry",
 	})
 	if err != nil {

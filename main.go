@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"go_micro_demo/proto"
+	"go_micro_demo/api"
 
 	"github.com/iGoogle-ink/gotil/xlog"
 	"github.com/micro/go-micro/v2"
@@ -14,7 +14,7 @@ import (
 
 type Greeter struct{}
 
-func (g *Greeter) Hello(ctx context.Context, req *proto.Request, rsp *proto.Response) error {
+func (g *Greeter) Hello(ctx context.Context, req *api.Request, rsp *api.Response) error {
 	rsp.Msg = "Hello " + req.Name
 	return nil
 }
@@ -42,11 +42,10 @@ func main() {
 			xlog.Debug("启动后的日志打印")
 			return nil
 		}),
-
 	)
 
 	// 注册服务
-	_ = proto.RegisterGreeterHandler(service.Server(), new(Greeter))
+	_ = api.RegisterGreeterHandler(service.Server(), new(Greeter))
 
 	// 启动服务
 	if err := service.Run(); err != nil {
