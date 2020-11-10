@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"go_micro_demo/api"
+	"go_micro_demo/api/payment"
 
 	"github.com/iGoogle-ink/gotil/xlog"
 	"github.com/micro/go-micro/v2"
@@ -14,7 +14,7 @@ import (
 
 type Greeter struct{}
 
-func (g *Greeter) Hello(ctx context.Context, req *api.Request, rsp *api.Response) error {
+func (g *Greeter) Hello(ctx context.Context, req *payment.Request, rsp *payment.Response) error {
 	rsp.Msg = "Hello " + req.Name
 	return nil
 }
@@ -45,7 +45,7 @@ func main() {
 	)
 
 	// 注册服务
-	_ = api.RegisterGreeterHandler(service.Server(), new(Greeter))
+	_ = payment.RegisterGreeterHandler(service.Server(), new(Greeter))
 
 	// 启动服务
 	if err := service.Run(); err != nil {

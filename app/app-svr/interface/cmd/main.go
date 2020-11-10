@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"go_micro_demo/api"
+	"go_micro_demo/api/payment"
 
 	"github.com/iGoogle-ink/gotil/xlog"
 	"github.com/micro/go-micro/v2"
@@ -11,7 +11,7 @@ import (
 	"github.com/micro/go-micro/v2/registry/etcd"
 )
 
-func main2() {
+func main() {
 	etcdRegistry := etcd.NewRegistry(func(options *registry.Options) {
 		options.Addrs = []string{"127.0.0.1:2379"}
 	})
@@ -27,10 +27,10 @@ func main2() {
 	service.Init()
 
 	// 向Service注册服务
-	greeterCli := api.NewGreeterService("service.hello.world", service.Client())
+	greeterCli := payment.NewGreeterService("service.hello.world", service.Client())
 
 	// 调用Service方法
-	rsp, err := greeterCli.Hello(context.Background(), &api.Request{
+	rsp, err := greeterCli.Hello(context.Background(), &payment.Request{
 		Name: "Jerry",
 	})
 	if err != nil {
