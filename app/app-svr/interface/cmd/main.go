@@ -7,19 +7,17 @@ import (
 
 	"github.com/iGoogle-ink/gotil/xlog"
 	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/etcd"
 )
 
 func main() {
-	etcdRegistry := etcd.NewRegistry(func(options *registry.Options) {
-		options.Addrs = []string{"127.0.0.1:2379"}
-	})
+	//etcdRegistry := etcd.NewRegistry(func(options *registry.Options) {
+	//	options.Addrs = []string{"127.0.0.1:2379"}
+	//})
 
 	// 创建服务
 	service := micro.NewService(
 		micro.Name("client.hello.world"),
-		micro.Registry(etcdRegistry),
+		//micro.Registry(etcdRegistry),
 		micro.Version("latest"),
 	)
 
